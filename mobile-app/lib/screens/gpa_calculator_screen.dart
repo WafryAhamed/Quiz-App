@@ -135,12 +135,10 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                         const SizedBox(height: 4),
                         Text(
                           'Calculate your academic performance',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(
-                                color: Colors.grey.shade600,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Colors.grey.shade600,
+                                  ),
                         ),
                       ],
                     ),
@@ -227,8 +225,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
                                   child: Text(
@@ -287,16 +284,15 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                                       initialValue: course.grade,
                                       items: _points.keys
                                           .map(
-                                            (grade) =>
-                                                DropdownMenuItem(
+                                            (grade) => DropdownMenuItem(
                                               value: grade,
                                               child: Text(grade),
                                             ),
                                           )
                                           .toList(),
                                       onChanged: (value) {
-                                        setState(() =>
-                                            course.grade = value ?? 'A');
+                                        setState(
+                                            () => course.grade = value ?? 'A');
                                         _gpa = null;
                                       },
                                       decoration: InputDecoration(
@@ -309,7 +305,8 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                                           borderRadius:
                                               BorderRadius.circular(16),
                                           borderSide: BorderSide(
-                                            color: Colors.white.withOpacity(0.3),
+                                            color:
+                                                Colors.white.withOpacity(0.3),
                                             width: 1.5,
                                           ),
                                         ),
@@ -317,7 +314,8 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                                           borderRadius:
                                               BorderRadius.circular(16),
                                           borderSide: BorderSide(
-                                            color: Colors.white.withOpacity(0.3),
+                                            color:
+                                                Colors.white.withOpacity(0.3),
                                             width: 1.5,
                                           ),
                                         ),

@@ -225,12 +225,10 @@ class _LiveQuizScreenState extends State<LiveQuizScreen> {
                         const SizedBox(height: 4),
                         Text(
                           'Real-time quiz sessions',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(
-                                color: Colors.grey.shade600,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Colors.grey.shade600,
+                                  ),
                         ),
                       ],
                     ),
@@ -363,7 +361,8 @@ class _LiveQuizScreenState extends State<LiveQuizScreen> {
                                       width: isSelected ? 2 : 1.5,
                                     ),
                                     color: isSelected
-                                        ? const Color(0xFF6EDC8C).withOpacity(0.1)
+                                        ? const Color(0xFF6EDC8C)
+                                            .withOpacity(0.1)
                                         : Colors.transparent,
                                   ),
                                   child: Row(
@@ -412,8 +411,9 @@ class _LiveQuizScreenState extends State<LiveQuizScreen> {
                             const SizedBox(height: 12),
                             PrimaryButton(
                               label: 'Submit Answer',
-                              onPressed:
-                                  _selectedAnswer == null ? null : _submitAnswer,
+                              onPressed: _selectedAnswer == null
+                                  ? null
+                                  : _submitAnswer,
                             ),
                           ],
                         ),
@@ -469,7 +469,6 @@ class _LiveQuizScreenState extends State<LiveQuizScreen> {
                                       fontWeight: FontWeight.w600,
                                     ),
                               ),
-                      
                             ],
                           ),
                           const SizedBox(height: 12),
@@ -488,8 +487,7 @@ class _LiveQuizScreenState extends State<LiveQuizScreen> {
                           else
                             ..._leaderboard.map((item) {
                               final row = item as Map<String, dynamic>;
-                              final position =
-                                  _leaderboard.indexOf(item) + 1;
+                              final position = _leaderboard.indexOf(item) + 1;
                               return Container(
                                 margin: const EdgeInsets.only(bottom: 8),
                                 padding: const EdgeInsets.all(12),
@@ -549,8 +547,7 @@ class _LiveQuizScreenState extends State<LiveQuizScreen> {
                                             Color(0xFF6EDC8C),
                                           ],
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(8),
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
                                       child: Text(
                                         '${row['score']} pts',

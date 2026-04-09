@@ -36,7 +36,8 @@ class FlashcardsScreen extends StatefulWidget {
 }
 
 class _FlashcardsScreenState extends State<FlashcardsScreen> {
-  final List<bool> _flipped = List.filled(FlashcardsScreen._cards.length, false);
+  final List<bool> _flipped =
+      List.filled(FlashcardsScreen._cards.length, false);
 
   @override
   Widget build(BuildContext context) {
@@ -71,12 +72,10 @@ class _FlashcardsScreenState extends State<FlashcardsScreen> {
                         const SizedBox(height: 4),
                         Text(
                           'Practice with interactive cards',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(
-                                color: Colors.grey.shade600,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Colors.grey.shade600,
+                                  ),
                         ),
                       ],
                     ),
@@ -122,8 +121,7 @@ class _FlashcardsScreenState extends State<FlashcardsScreen> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Container(
-                                        padding:
-                                            const EdgeInsets.symmetric(
+                                        padding: const EdgeInsets.symmetric(
                                           horizontal: 12,
                                           vertical: 6,
                                         ),
@@ -174,14 +172,13 @@ class _FlashcardsScreenState extends State<FlashcardsScreen> {
                                             ? (card['back'] ?? '')
                                             : (card['front'] ?? ''),
                                         textAlign: TextAlign.center,
-                                        style:
-                                            Theme.of(context)
-                                                .textTheme
-                                                .titleMedium
-                                                ?.copyWith(
-                                          color: const Color(0xFF0F3D3E),
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(
+                                              color: const Color(0xFF0F3D3E),
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                       ),
                                     ],
                                   ),

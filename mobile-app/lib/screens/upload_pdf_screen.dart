@@ -104,12 +104,10 @@ class _UploadPdfScreenState extends State<UploadPdfScreen> {
                         const SizedBox(height: 4),
                         Text(
                           'Create quizzes from your lecture notes',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(
-                                color: Colors.grey.shade600,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Colors.grey.shade600,
+                                  ),
                         ),
                       ],
                     ),
@@ -130,10 +128,13 @@ class _UploadPdfScreenState extends State<UploadPdfScreen> {
                         children: [
                           Text(
                             'Select Lecture Notes PDF',
-                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              color: const Color(0xFF0F3D3E),
-                              fontWeight: FontWeight.w600,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(
+                                  color: const Color(0xFF0F3D3E),
+                                  fontWeight: FontWeight.w600,
+                                ),
                           ),
                           const SizedBox(height: 12),
                           Container(
@@ -150,7 +151,8 @@ class _UploadPdfScreenState extends State<UploadPdfScreen> {
                               children: [
                                 Icon(
                                   Icons.insert_drive_file,
-                                  color: const Color(0xFF6EDC8C).withOpacity(0.6),
+                                  color:
+                                      const Color(0xFF6EDC8C).withOpacity(0.6),
                                   size: 32,
                                 ),
                                 const SizedBox(width: 12),
@@ -243,7 +245,8 @@ class _UploadPdfScreenState extends State<UploadPdfScreen> {
                             Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: const Color(0xFF6EDC8C).withOpacity(0.08),
+                                color:
+                                    const Color(0xFF6EDC8C).withOpacity(0.08),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Column(

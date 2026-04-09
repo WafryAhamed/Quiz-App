@@ -80,17 +80,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     'Create Account ✨',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                      color: const Color(0xFF0F3D3E),
-                      fontWeight: FontWeight.w700,
-                    ),
+                          color: const Color(0xFF0F3D3E),
+                          fontWeight: FontWeight.w700,
+                        ),
                   ),
                   const SizedBox(height: 12),
                   Text(
                     'Join our learning community',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Colors.grey.shade600,
-                    ),
+                          color: Colors.grey.shade600,
+                        ),
                   ),
                   const SizedBox(height: 32),
 
@@ -107,9 +107,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             label: 'Full Name',
                             hint: 'e.g., Malsha Fernando',
                             prefixIcon: Icons.person_outline,
-                            validator: (value) => value == null || value.trim().isEmpty
-                                ? 'Name is required'
-                                : null,
+                            validator: (value) =>
+                                value == null || value.trim().isEmpty
+                                    ? 'Name is required'
+                                    : null,
                           ),
                           const SizedBox(height: 16),
 
@@ -120,9 +121,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             hint: 'e.g., malsha@ucsc.cmb.ac.lk',
                             keyboardType: TextInputType.emailAddress,
                             prefixIcon: Icons.email_outlined,
-                            validator: (value) => value == null || value.trim().isEmpty
-                                ? 'Email is required'
-                                : null,
+                            validator: (value) =>
+                                value == null || value.trim().isEmpty
+                                    ? 'Email is required'
+                                    : null,
                           ),
                           const SizedBox(height: 16),
 
@@ -172,8 +174,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   setState(() => _role = value ?? 'student'),
                               decoration: InputDecoration(
                                 labelText: 'Role',
-                                prefixIcon:
-                                    const Icon(Icons.school_outlined),
+                                prefixIcon: const Icon(Icons.school_outlined),
                                 filled: true,
                                 fillColor: Colors.white.withOpacity(0.8),
                                 border: OutlineInputBorder(

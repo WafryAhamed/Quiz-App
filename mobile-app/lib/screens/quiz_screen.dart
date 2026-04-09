@@ -155,8 +155,8 @@ class _QuizScreenState extends State<QuizScreen> {
             child: Text(
               'No questions available for this PDF yet.',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Colors.grey.shade600,
-              ),
+                    color: Colors.grey.shade600,
+                  ),
             ),
           ),
         ),
@@ -246,11 +246,10 @@ class _QuizScreenState extends State<QuizScreen> {
                       const SizedBox(height: 8),
                       Text(
                         question.question,
-                        style:
-                            Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: const Color(0xFF0F3D3E),
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              color: const Color(0xFF0F3D3E),
+                              fontWeight: FontWeight.w600,
+                            ),
                       ),
                     ],
                   ),
@@ -284,8 +283,8 @@ class _QuizScreenState extends State<QuizScreen> {
                             boxShadow: isSelected
                                 ? [
                                     BoxShadow(
-                                      color:
-                                          const Color(0xFF6EDC8C).withOpacity(0.2),
+                                      color: const Color(0xFF6EDC8C)
+                                          .withOpacity(0.2),
                                       blurRadius: 12,
                                       offset: const Offset(0, 4),
                                     ),

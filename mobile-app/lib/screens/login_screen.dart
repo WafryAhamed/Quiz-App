@@ -79,18 +79,19 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         'Welcome Back 👋',
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                          color: const Color(0xFF0F3D3E),
-                          fontWeight: FontWeight.w700,
-                        ),
+                        style:
+                            Theme.of(context).textTheme.displaySmall?.copyWith(
+                                  color: const Color(0xFF0F3D3E),
+                                  fontWeight: FontWeight.w700,
+                                ),
                       ),
                       const SizedBox(height: 12),
                       Text(
                         'Login to continue your quiz learning journey',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: Colors.grey.shade600,
-                        ),
+                              color: Colors.grey.shade600,
+                            ),
                       ),
                       const SizedBox(height: 40),
 
