@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../core/storage/session_storage.dart';
+import '../widgets/index.dart';
 import 'flashcards_screen.dart';
 import 'gpa_calculator_screen.dart';
 import 'live_quiz_screen.dart';
@@ -36,79 +37,183 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Quiz Learning Dashboard'),
-        actions: [
-          IconButton(
-            onPressed: _logout,
-            icon: const Icon(Icons.logout),
-            tooltip: 'Logout',
-          ),
-        ],
-      ),
-      body: FutureBuilder<Map<String, String>>(
-        future: _loadProfile(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
+      body: GradientBackground(
+        child: SafeArea(
+          child: FutureBuilder<Map<String, String>>(
+            future: _loadProfile(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const Center(child: CircularProgressIndicator());
+              }
 
-          final profile = snapshot.data!;
-          return ListView(
-            padding: const EdgeInsets.all(16),
-            children: [
-              Card(
-                child: ListTile(
-                  leading: const CircleAvatar(child: Icon(Icons.person)),
-                  title: Text('Ayubowan, ${profile['name'] ?? ''}!'),
-                  subtitle: Text('Role: ${profile['role'] ?? 'student'}'),
-                ),
-              ),
-              const SizedBox(height: 16),
-              _menuTile(
-                context,
-                title: 'Upload PDF & Generate Quiz',
-                icon: Icons.picture_as_pdf,
-                routeName: UploadPdfScreen.routeName,
-              ),
-              _menuTile(
-                context,
-                title: 'Flashcards',
-                icon: Icons.style,
-                routeName: FlashcardsScreen.routeName,
-              ),
-              _menuTile(
-                context,
-                title: 'GPA Calculator',
-                icon: Icons.calculate,
-                routeName: GpaCalculatorScreen.routeName,
-              ),
-              _menuTile(
-                context,
-                title: 'Live Quiz Join / Create',
-                icon: Icons.wifi_tethering,
-                routeName: LiveQuizScreen.routeName,
-              ),
-            ],
-          );
-        },
+              final profile = snapshot.data!;
+              return CustomScrollView(
+                slivers: [
+                  // Header
+                  SliverAppBar(
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    pinned: true,
+                    flexibleSpace: FlexibleSpaceBar(
+                      background: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 12),
+                            Text(
+                              'Ayubowan 👋',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall
+                                  ?.copyWith(
+                                    color: const Color(0xFF0F3D3E),
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              profile['name'] ?? 'User',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(
+                                    color: Colors.grey.shade600,
+                                  ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    actions: [
+                      IconButton(
+                        onPressed: _logout,
+                        icon: const Icon(
+                          Icons.logout,
+                          color: Color(0xFF0F3D3E),
+                        ),
+                        tooltip: 'Logout',
+                      ),
+                    ],
+                  ),
+
+                  // Profile Card
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    sliver: SliverToBoxAdapter(
+                      child: GlassCard(
+                        margin: const EdgeInsets.only(bottom: 24),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 64,
+                              height: 64,
+                              decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color(0xFFB7E36D),
+                                    Color(0xFF6EDC8C),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: const Icon(
+                                Icons.person,
+                                color: Color(0xFF0F3D3E),
+                                size: 32,
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    profile['name'] ?? 'User',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xFF0F3D3E),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    'Role: ${profile['role']?.capitalize() ?? 'Student'}',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.grey.shade600,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  // Menu Items
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    sliver: SliverList(
+                      delegate: SliverChildListDelegate([
+                        SubjectCard(
+                          title: 'Upload PDF & Generate Quiz',
+                          subtitle: 'Create quizzes from your notes',
+                          icon: Icons.picture_as_pdf,
+                          onTap: () => Navigator.pushNamed(
+                            context,
+                            UploadPdfScreen.routeName,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        SubjectCard(
+                          title: 'Flashcards',
+                          subtitle: 'Practice with flashcards',
+                          icon: Icons.style,
+                          onTap: () => Navigator.pushNamed(
+                            context,
+                            FlashcardsScreen.routeName,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        SubjectCard(
+                          title: 'GPA Calculator',
+                          subtitle: 'Calculate your GPA',
+                          icon: Icons.calculate,
+                          onTap: () => Navigator.pushNamed(
+                            context,
+                            GpaCalculatorScreen.routeName,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        SubjectCard(
+                          title: 'Live Quiz Join / Create',
+                          subtitle: 'Real-time quiz sessions',
+                          icon: Icons.wifi_tethering,
+                          onTap: () => Navigator.pushNamed(
+                            context,
+                            LiveQuizScreen.routeName,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                      ]),
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
       ),
     );
   }
+}
 
-  Widget _menuTile(
-    BuildContext context, {
-    required String title,
-    required IconData icon,
-    required String routeName,
-  }) {
-    return Card(
-      child: ListTile(
-        leading: Icon(icon),
-        title: Text(title),
-        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-        onTap: () => Navigator.pushNamed(context, routeName),
-      ),
-    );
+extension StringExtension on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${substring(1)}";
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../core/storage/session_storage.dart';
 import '../services/live_quiz_service.dart';
+import '../widgets/index.dart';
 
 class LiveQuizScreen extends StatefulWidget {
   const LiveQuizScreen({super.key});
@@ -194,155 +195,415 @@ class _LiveQuizScreenState extends State<LiveQuizScreen> {
         (_activeQuestion?['options'] as List<dynamic>?)?.cast<String>() ?? [];
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Live Quiz')),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          if (_role == 'lecturer')
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const Text(
-                      'Lecturer Controls',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+      body: GradientBackground(
+        child: SafeArea(
+          child: CustomScrollView(
+            slivers: [
+              // Header
+              SliverAppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                pinned: true,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 8),
+                        Text(
+                          'Live Quiz 📡',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              ?.copyWith(
+                                color: const Color(0xFF0F3D3E),
+                                fontWeight: FontWeight.w700,
+                              ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'Real-time quiz sessions',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(
+                                color: Colors.grey.shade600,
+                              ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 10),
-                    TextField(
-                      controller: _pdfIdController,
-                      decoration: const InputDecoration(
-                        labelText: 'PDF ID',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    ElevatedButton(
-                      onPressed: _loading ? null : _createSession,
-                      child: const Text('Create Live Session'),
-                    ),
-                    if (_sessionCode.isNotEmpty)
-                      OutlinedButton(
-                        onPressed: _startSession,
-                        child: Text('Start Session $_sessionCode'),
-                      ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Text(
-                    'Join Session',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                  ),
-                  const SizedBox(height: 10),
-                  TextField(
-                    controller: _codeController,
-                    textCapitalization: TextCapitalization.characters,
-                    decoration: const InputDecoration(
-                      labelText: 'Session Code',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: _loading ? null : _joinSession,
-                    child: const Text('Join Live Quiz'),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 12),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Participants: ${_participants.length}'),
-                  const SizedBox(height: 8),
-                  if (_activeQuestion != null) ...[
-                    Text(
-                      _activeQuestion!['question'] as String,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
+
+              // Content
+              SliverPadding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                sliver: SliverList(
+                  delegate: SliverChildListDelegate([
+                    // Lecturer Controls
+                    if (_role == 'lecturer') ...[
+                      GlassCard(
+                        margin: const EdgeInsets.only(bottom: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Lecturer Controls 🎓',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.copyWith(
+                                    color: const Color(0xFF0F3D3E),
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                            ),
+                            const SizedBox(height: 12),
+                            CustomTextField(
+                              controller: _pdfIdController,
+                              label: 'PDF ID',
+                              prefixIcon: Icons.note_outlined,
+                            ),
+                            const SizedBox(height: 12),
+                            PrimaryButton(
+                              label: 'Create Live Session',
+                              isLoading: _loading,
+                              onPressed: _loading ? null : _createSession,
+                            ),
+                            if (_sessionCode.isNotEmpty) ...[
+                              const SizedBox(height: 12),
+                              SecondaryButton(
+                                label: 'Start Session $_sessionCode',
+                                icon: Icons.play_circle_outline,
+                                onPressed: _startSession,
+                              ),
+                            ],
+                          ],
+                        ),
+                      ),
+                    ],
+
+                    // Join Session
+                    GlassCard(
+                      margin: const EdgeInsets.only(bottom: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Join Session',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(
+                                  color: const Color(0xFF0F3D3E),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                          ),
+                          const SizedBox(height: 12),
+                          CustomTextField(
+                            controller: _codeController,
+                            label: 'Session Code',
+                            hint: 'e.g., ABC123',
+                            prefixIcon: Icons.vpn_key_outlined,
+                          ),
+                          const SizedBox(height: 12),
+                          PrimaryButton(
+                            label: 'Join Live Quiz',
+                            isLoading: _loading,
+                            onPressed: _loading ? null : _joinSession,
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    ...options.map((option) {
-                      final isSelected = _selectedAnswer == option;
-                      return Card(
-                        color: isSelected
-                            ? Theme.of(context).colorScheme.primaryContainer
-                            : null,
-                        child: ListTile(
-                          onTap: () {
-                            setState(() => _selectedAnswer = option);
-                          },
-                          leading: Icon(
-                            isSelected
-                                ? Icons.check_circle
-                                : Icons.circle_outlined,
-                            color: isSelected
-                                ? Theme.of(context).colorScheme.primary
-                                : null,
-                          ),
-                          title: Text(option),
+
+                    // Question & Options
+                    if (_activeQuestion != null) ...[
+                      GlassCard(
+                        margin: const EdgeInsets.only(bottom: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Current Question',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey.shade500,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              _activeQuestion!['question'] as String,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(
+                                    color: const Color(0xFF0F3D3E),
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                            ),
+                            const SizedBox(height: 12),
+                            ...options.map((option) {
+                              final isSelected = _selectedAnswer == option;
+                              return GestureDetector(
+                                onTap: () {
+                                  setState(() => _selectedAnswer = option);
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.only(bottom: 10),
+                                  padding: const EdgeInsets.all(12),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(
+                                      color: isSelected
+                                          ? const Color(0xFF6EDC8C)
+                                          : Colors.white.withOpacity(0.3),
+                                      width: isSelected ? 2 : 1.5,
+                                    ),
+                                    color: isSelected
+                                        ? const Color(0xFF6EDC8C).withOpacity(0.1)
+                                        : Colors.transparent,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 20,
+                                        height: 20,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: isSelected
+                                                ? const Color(0xFF6EDC8C)
+                                                : Colors.grey.shade300,
+                                          ),
+                                        ),
+                                        child: isSelected
+                                            ? const Center(
+                                                child: Icon(
+                                                  Icons.check,
+                                                  size: 12,
+                                                  color: Color(0xFF6EDC8C),
+                                                ),
+                                              )
+                                            : null,
+                                      ),
+                                      const SizedBox(width: 12),
+                                      Expanded(
+                                        child: Text(
+                                          option,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: isSelected
+                                                ? FontWeight.w600
+                                                : FontWeight.w500,
+                                            color: isSelected
+                                                ? const Color(0xFF0F3D3E)
+                                                : Colors.grey.shade700,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }),
+                            const SizedBox(height: 12),
+                            PrimaryButton(
+                              label: 'Submit Answer',
+                              onPressed:
+                                  _selectedAnswer == null ? null : _submitAnswer,
+                            ),
+                          ],
                         ),
-                      );
-                    }),
-                    ElevatedButton(
-                      onPressed: _selectedAnswer == null ? null : _submitAnswer,
-                      child: const Text('Submit Live Answer'),
+                      ),
+                    ] else
+                      GlassCard(
+                        margin: const EdgeInsets.only(bottom: 16),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.hourglass_empty,
+                                  size: 48,
+                                  color: Colors.grey.shade400,
+                                ),
+                                const SizedBox(height: 12),
+                                Text(
+                                  'Waiting for lecturer...',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.grey.shade600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+
+                    // Leaderboard
+                    GlassCard(
+                      margin: const EdgeInsets.only(bottom: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.emoji_events,
+                                color: Color(0xFF6EDC8C),
+                                size: 20,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                'Leaderboard',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(
+                                      color: const Color(0xFF0F3D3E),
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                              ),
+                      
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          if (_leaderboard.isEmpty)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              child: Center(
+                                child: Text(
+                                  'No scores yet',
+                                  style: TextStyle(
+                                    color: Colors.grey.shade500,
+                                  ),
+                                ),
+                              ),
+                            )
+                          else
+                            ..._leaderboard.map((item) {
+                              final row = item as Map<String, dynamic>;
+                              final position =
+                                  _leaderboard.indexOf(item) + 1;
+                              return Container(
+                                margin: const EdgeInsets.only(bottom: 8),
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  color: position == 1
+                                      ? const Color(0xFF6EDC8C).withOpacity(0.1)
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 24,
+                                      child: Text(
+                                        '#$position',
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.grey.shade600,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Icon(
+                                      position == 1
+                                          ? Icons.star
+                                          : Icons.person_outline,
+                                      size: 16,
+                                      color: position == 1
+                                          ? const Color(0xFF6EDC8C)
+                                          : Colors.grey.shade400,
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                      child: Text(
+                                        row['name']?.toString() ?? '-',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: position == 1
+                                              ? FontWeight.w600
+                                              : FontWeight.w500,
+                                          color: position == 1
+                                              ? const Color(0xFF0F3D3E)
+                                              : Colors.grey.shade700,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 10,
+                                        vertical: 4,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        gradient: const LinearGradient(
+                                          colors: [
+                                            Color(0xFFB7E36D),
+                                            Color(0xFF6EDC8C),
+                                          ],
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8),
+                                      ),
+                                      child: Text(
+                                        '${row['score']} pts',
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color(0xFF0F3D3E),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }),
+                        ],
+                      ),
                     ),
-                  ] else
-                    const Text(
-                      'Waiting for lecturer to start and push questions...',
+
+                    // Participants
+                    GlassCard(
+                      margin: const EdgeInsets.only(bottom: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.people_outline,
+                                color: Color(0xFF6EDC8C),
+                                size: 20,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                'Participants (${_participants.length})',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(
+                                      color: const Color(0xFF0F3D3E),
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                ],
+                  ]),
+                ),
               ),
-            ),
+            ],
           ),
-          const SizedBox(height: 12),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Leaderboard',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                  ),
-                  const SizedBox(height: 10),
-                  if (_leaderboard.isEmpty)
-                    const Text('No scores yet')
-                  else
-                    ..._leaderboard.map((item) {
-                      final row = item as Map<String, dynamic>;
-                      return ListTile(
-                        dense: true,
-                        leading: const Icon(Icons.emoji_events),
-                        title: Text(row['name']?.toString() ?? '-'),
-                        trailing: Text('${row['score']} pts'),
-                      );
-                    }),
-                ],
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
