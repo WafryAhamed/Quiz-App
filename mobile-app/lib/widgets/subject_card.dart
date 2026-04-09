@@ -77,7 +77,7 @@ class SubjectCard extends StatelessWidget {
               Icon(
                 Icons.arrow_forward_ios,
                 size: 16,
-                color: const Color(0xFF6EDC8C).withOpacity(0.6),
+                color: const Color(0xFF6EDC8C).withValues(alpha: 0.6),
               ),
             ],
           ),

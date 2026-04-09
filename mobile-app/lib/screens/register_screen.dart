@@ -152,7 +152,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.04),
+                                  color: Colors.black.withValues(alpha: 0.04),
                                   blurRadius: 12,
                                   offset: const Offset(0, 4),
                                 ),
@@ -176,18 +176,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 labelText: 'Role',
                                 prefixIcon: const Icon(Icons.school_outlined),
                                 filled: true,
-                                fillColor: Colors.white.withOpacity(0.8),
+                                fillColor: Colors.white.withValues(alpha: 0.8),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(16),
                                   borderSide: BorderSide(
-                                    color: Colors.white.withOpacity(0.3),
+                                    color: Colors.white.withValues(alpha: 0.3),
                                     width: 1.5,
                                   ),
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(16),
                                   borderSide: BorderSide(
-                                    color: Colors.white.withOpacity(0.3),
+                                    color: Colors.white.withValues(alpha: 0.3),
                                     width: 1.5,
                                   ),
                                 ),

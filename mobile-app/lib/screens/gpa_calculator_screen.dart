@@ -274,7 +274,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                                     decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Colors.black.withOpacity(0.04),
+                                          color: Colors.black.withValues(alpha: 0.04),
                                           blurRadius: 12,
                                           offset: const Offset(0, 4),
                                         ),
@@ -300,13 +300,13 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                                         prefixIcon: const Icon(Icons.grade),
                                         filled: true,
                                         fillColor:
-                                            Colors.white.withOpacity(0.8),
+                                            Colors.white.withValues(alpha: 0.8),
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(16),
                                           borderSide: BorderSide(
                                             color:
-                                                Colors.white.withOpacity(0.3),
+                                                Colors.white.withValues(alpha: 0.3),
                                             width: 1.5,
                                           ),
                                         ),
@@ -315,7 +315,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                                               BorderRadius.circular(16),
                                           borderSide: BorderSide(
                                             color:
-                                                Colors.white.withOpacity(0.3),
+                                                Colors.white.withValues(alpha: 0.3),
                                             width: 1.5,
                                           ),
                                         ),

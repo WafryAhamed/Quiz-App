@@ -141,18 +141,18 @@ class _UploadPdfScreenState extends State<UploadPdfScreen> {
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: const Color(0xFF6EDC8C).withOpacity(0.3),
+                                color: const Color(0xFF6EDC8C).withValues(alpha: 0.3),
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(16),
-                              color: const Color(0xFF6EDC8C).withOpacity(0.05),
+                              color: const Color(0xFF6EDC8C).withValues(alpha: 0.05),
                             ),
                             child: Row(
                               children: [
                                 Icon(
                                   Icons.insert_drive_file,
                                   color:
-                                      const Color(0xFF6EDC8C).withOpacity(0.6),
+                                      const Color(0xFF6EDC8C).withValues(alpha: 0.6),
                                   size: 32,
                                 ),
                                 const SizedBox(width: 12),
@@ -223,9 +223,9 @@ class _UploadPdfScreenState extends State<UploadPdfScreen> {
                           children: [
                             Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.check_circle,
-                                  color: const Color(0xFF6EDC8C),
+                                  color: Color(0xFF6EDC8C),
                                   size: 28,
                                 ),
                                 const SizedBox(width: 12),
@@ -246,7 +246,7 @@ class _UploadPdfScreenState extends State<UploadPdfScreen> {
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
                                 color:
-                                    const Color(0xFF6EDC8C).withOpacity(0.08),
+                                    const Color(0xFF6EDC8C).withValues(alpha: 0.08),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Column(

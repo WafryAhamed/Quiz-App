@@ -223,7 +223,7 @@ class _QuizScreenState extends State<QuizScreen> {
                         ),
                         backgroundColor: _getDifficultyColor(
                           question.difficulty,
-                        ).withOpacity(0.2),
+                        ).withValues(alpha: 0.2),
                       ),
                     ),
                   ],
@@ -274,24 +274,24 @@ class _QuizScreenState extends State<QuizScreen> {
                             border: Border.all(
                               color: isSelected
                                   ? const Color(0xFF6EDC8C)
-                                  : Colors.white.withOpacity(0.3),
+                                  : Colors.white.withValues(alpha: 0.3),
                               width: isSelected ? 2.5 : 1.5,
                             ),
                             color: isSelected
-                                ? const Color(0xFF6EDC8C).withOpacity(0.1)
-                                : Colors.white.withOpacity(0.75),
+                                ? const Color(0xFF6EDC8C).withValues(alpha: 0.1)
+                                : Colors.white.withValues(alpha: 0.75),
                             boxShadow: isSelected
                                 ? [
                                     BoxShadow(
                                       color: const Color(0xFF6EDC8C)
-                                          .withOpacity(0.2),
+                                          .withValues(alpha: 0.2),
                                       blurRadius: 12,
                                       offset: const Offset(0, 4),
                                     ),
                                   ]
                                 : [
                                     BoxShadow(
-                                      color: Colors.black.withOpacity(0.04),
+                                      color: Colors.black.withValues(alpha: 0.04),
                                       blurRadius: 8,
                                       offset: const Offset(0, 2),
                                     ),

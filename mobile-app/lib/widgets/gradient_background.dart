@@ -20,8 +20,8 @@ class GradientBackground extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: [
             const Color(0xFFF8FDFB),
-            const Color(0xFFF0F9F4).withOpacity(0.8),
-            const Color(0xFFFCFDEF).withOpacity(0.6),
+            const Color(0xFFF0F9F4).withValues(alpha: 0.8),
+            const Color(0xFFFCFDEF).withValues(alpha: 0.6),
           ],
         ),
       ),
@@ -39,8 +39,8 @@ class GradientBackground extends StatelessWidget {
                   shape: BoxShape.circle,
                   gradient: LinearGradient(
                     colors: [
-                      const Color(0xFFB7E36D).withOpacity(0.1),
-                      const Color(0xFF6EDC8C).withOpacity(0.05),
+                      const Color(0xFFB7E36D).withValues(alpha: 0.1),
+                      const Color(0xFF6EDC8C).withValues(alpha: 0.05),
                     ],
                   ),
                 ),
@@ -57,8 +57,8 @@ class GradientBackground extends StatelessWidget {
                   shape: BoxShape.circle,
                   gradient: LinearGradient(
                     colors: [
-                      const Color(0xFF9FE870).withOpacity(0.08),
-                      const Color(0xFF6EDC8C).withOpacity(0.04),
+                      const Color(0xFF9FE870).withValues(alpha: 0.08),
+                      const Color(0xFF6EDC8C).withValues(alpha: 0.04),
                     ],
                   ),
                 ),

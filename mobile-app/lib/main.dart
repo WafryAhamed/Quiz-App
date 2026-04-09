@@ -37,7 +37,7 @@ class QuizLearningApp extends StatelessWidget {
           centerTitle: false,
         ),
         cardTheme: CardThemeData(
-          color: Colors.white.withOpacity(0.75),
+          color: Colors.white.withValues(alpha: 0.75),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
@@ -49,7 +49,7 @@ class QuizLearningApp extends StatelessWidget {
             vertical: 14,
           ),
           filled: true,
-          fillColor: Colors.white.withOpacity(0.8),
+          fillColor: Colors.white.withValues(alpha: 0.8),
           labelStyle: const TextStyle(
             color: Color(0xFF6EDC8C),
             fontWeight: FontWeight.w500,
@@ -57,14 +57,14 @@ class QuizLearningApp extends StatelessWidget {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
             borderSide: BorderSide(
-              color: Colors.white.withOpacity(0.3),
+              color: Colors.white.withValues(alpha: 0.3),
               width: 1.5,
             ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
             borderSide: BorderSide(
-              color: Colors.white.withOpacity(0.3),
+              color: Colors.white.withValues(alpha: 0.3),
               width: 1.5,
             ),
           ),

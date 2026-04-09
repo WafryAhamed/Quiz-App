@@ -37,7 +37,7 @@ class PrimaryButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF6EDC8C).withOpacity(0.3),
+              color: const Color(0xFF6EDC8C).withValues(alpha: 0.3),
               blurRadius: 16,
               offset: const Offset(0, 8),
             ),
@@ -109,7 +109,7 @@ class SecondaryButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
-            color: const Color(0xFF6EDC8C).withOpacity(0.5),
+            color: const Color(0xFF6EDC8C).withValues(alpha: 0.5),
             width: 2,
           ),
           borderRadius: BorderRadius.circular(20),

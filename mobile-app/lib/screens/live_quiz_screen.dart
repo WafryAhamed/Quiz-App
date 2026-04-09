@@ -357,12 +357,12 @@ class _LiveQuizScreenState extends State<LiveQuizScreen> {
                                     border: Border.all(
                                       color: isSelected
                                           ? const Color(0xFF6EDC8C)
-                                          : Colors.white.withOpacity(0.3),
+                                          : Colors.white.withValues(alpha: 0.3),
                                       width: isSelected ? 2 : 1.5,
                                     ),
                                     color: isSelected
                                         ? const Color(0xFF6EDC8C)
-                                            .withOpacity(0.1)
+                                            .withValues(alpha: 0.1)
                                         : Colors.transparent,
                                   ),
                                   child: Row(
@@ -493,7 +493,7 @@ class _LiveQuizScreenState extends State<LiveQuizScreen> {
                                 padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
                                   color: position == 1
-                                      ? const Color(0xFF6EDC8C).withOpacity(0.1)
+                                      ? const Color(0xFF6EDC8C).withValues(alpha: 0.1)
                                       : Colors.transparent,
                                   borderRadius: BorderRadius.circular(12),
                                 ),
